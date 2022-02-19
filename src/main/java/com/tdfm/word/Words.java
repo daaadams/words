@@ -39,11 +39,10 @@ public class Words {
                 collect(Collectors.groupingBy(k -> k, Collectors.counting()));
 
         // update count in threadsafe manner with minimal blocking
-        providedWordCount.entrySet()
-                .stream()
-                .forEach(
-                        word -> wordCount.merge(word.getKey(), word.getValue(), (prev, current) -> prev + current)
-                );
+        providedWordCount.forEach((key, value) -> wordCount.merge(key, value, Long::sum));
     }
 
+    public long countOf(String word) {
+        return wordCount.get(word);
+    }
 }
