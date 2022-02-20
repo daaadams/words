@@ -32,7 +32,7 @@ public class Words {
             throw new IllegalArgumentException("Specified words must only contain alphabetic characters");
         }
 
-        // convert to word by count upfront so we spend less time locking map in next step (fewer words to loop through)
+        // convert to word by count upfront, so we spend less time locking map in next step (fewer words to loop through)
         Map<String, Long> providedWordCount = wordsAsList
                 .stream()
                 .map(word -> translator.translate(word.toLowerCase())).
